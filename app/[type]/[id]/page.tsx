@@ -149,18 +149,16 @@ export default async function TypedDetailPage({ params }: PageProps) {
     return (
       <main className="min-h-screen bg-gradient-to-br from-slate-900 via-emerald-900 to-slate-800 flex items-center justify-center p-4">
         <article className="backdrop-blur-md bg-emerald-950/30 rounded-xl sm:rounded-2xl border border-emerald-500/20 p-6 sm:p-8 text-center max-w-md w-full">
-          <header>
-            <h1 className="text-xl sm:text-2xl font-bold text-emerald-50 mb-4">Invalid Type</h1>
-          </header>
+          <h1 className="text-xl sm:text-2xl font-bold text-emerald-50 mb-4">Invalid Type</h1>
           <p className="text-emerald-100/70 mb-4 text-sm sm:text-base">The requested type "{type}" is not supported.</p>
-          <footer>
+          <nav>
             <Link href="/">
               <Button className="bg-emerald-950/30 hover:bg-emerald-950/40 text-emerald-100 border-emerald-500/30 w-full sm:w-auto">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to Home
               </Button>
             </Link>
-          </footer>
+          </nav>
         </article>
       </main>
     )
@@ -172,23 +170,21 @@ export default async function TypedDetailPage({ params }: PageProps) {
     return (
       <main className="min-h-screen bg-gradient-to-br from-slate-900 via-emerald-900 to-slate-800 flex items-center justify-center p-4">
         <article className="backdrop-blur-md bg-emerald-950/30 rounded-xl sm:rounded-2xl border border-emerald-500/20 p-6 sm:p-8 text-center max-w-md w-full">
-          <header>
-            <h1 className="text-xl sm:text-2xl font-bold text-emerald-50 mb-4">Item Not Found</h1>
-          </header>
+          <h1 className="text-xl sm:text-2xl font-bold text-emerald-50 mb-4">Item Not Found</h1>
           <p className="text-emerald-100/70 mb-4 text-sm sm:text-base">
             The requested {type} with ID "{id}" could not be found in The One API.
           </p>
           <p className="text-emerald-100/50 text-xs sm:text-sm mb-4 break-all">
             API URL: https://the-one-api.dev/v2/{type}/{id}
           </p>
-          <footer>
+          <nav>
             <Link href="/">
               <Button className="bg-emerald-950/30 hover:bg-emerald-950/40 text-emerald-100 border-emerald-500/30 w-full sm:w-auto">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to Home
               </Button>
             </Link>
-          </footer>
+          </nav>
         </article>
       </main>
     )
@@ -225,156 +221,320 @@ export default async function TypedDetailPage({ params }: PageProps) {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-emerald-900 to-slate-800 p-4 sm:p-6 lg:p-8">
-      <article className="max-w-4xl mx-auto">
-        <header className="mb-6 sm:mb-8">
-          <Link href="/">
-            <Button className="bg-emerald-950/30 hover:bg-emerald-950/40 text-emerald-100 border-emerald-500/30 mb-4 sm:mb-6">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Home
-            </Button>
-          </Link>
-          <section className="flex items-center gap-2 sm:gap-3">
-            {getTypeIcon(type)}
-            <Badge variant="outline" className={`${getTypeColor(type)} text-xs sm:text-sm`}>
-              {type.charAt(0).toUpperCase() + type.slice(1)}
-            </Badge>
+    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-emerald-900 to-slate-800">
+      {/* Background Pattern */}
+      <section className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fillRule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23065F46&quot; fillOpacity=&quot;0.08&quot;%3E%3Ccircle cx=&quot;30&quot; cy=&quot;30&quot; r=&quot;2&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></section>
+
+      <article className="relative z-10">
+        {/* Header */}
+        <header className="p-4 sm:p-6 md:p-8">
+          <section className="max-w-4xl mx-auto">
+            <nav className="backdrop-blur-md bg-emerald-950/30 rounded-xl sm:rounded-2xl border border-emerald-500/20 p-4 sm:p-6 shadow-2xl shadow-emerald-900/20">
+              <Link href="/">
+                <Button className="mb-4 bg-emerald-950/30 hover:bg-emerald-950/40 text-emerald-100 border-emerald-500/30 w-full sm:w-auto">
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Back to Home
+                </Button>
+              </Link>
+              <section className="flex flex-col sm:flex-row sm:items-center gap-3 mb-4">
+                {getTypeIcon(type)}
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-50 break-words">{item.name}</h1>
+                <Badge
+                  className={`${getTypeColor(type)} backdrop-blur-sm text-xs sm:text-sm self-start sm:self-center`}
+                >
+                  {type}
+                </Badge>
+              </section>
+              <p className="text-emerald-100/80 text-sm sm:text-base md:text-lg">
+                {type === "movie" && "Part of the legendary Lord of the Rings film trilogy"}
+                {type === "character" && "A character from the world of Middle-earth"}
+                {type === "book" && "A book from J.R.R. Tolkien's Middle-earth legendarium"}
+                {type === "quote" && "A memorable quote from Middle-earth"}
+              </p>
+            </nav>
           </section>
         </header>
 
-        <section className="space-y-6 sm:space-y-8">
-          {type === "movie" && (
-            <Card className="backdrop-blur-md bg-emerald-950/30 border-emerald-500/20">
-              <CardHeader>
-                <CardTitle className="text-xl sm:text-2xl font-bold text-emerald-50">
-                  {(item as Movie).name}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {(item as Movie).runtimeInMinutes && (
-                  <section className="flex items-center gap-2 text-emerald-100/70">
-                    <Clock className="h-4 w-4 text-emerald-400" />
-                    <data value={(item as Movie).runtimeInMinutes}>Runtime: {(item as Movie).runtimeInMinutes} minutes</data>
+        {/* Main Content */}
+        <section className="p-4 sm:p-6 md:p-8">
+          <section className="max-w-4xl mx-auto space-y-4 sm:space-y-6">
+            {type === "movie" && (
+              <>
+                {/* Movie Stats */}
+                <Card className="backdrop-blur-md bg-emerald-950/20 border-emerald-500/20">
+                  <CardHeader className="pb-3 sm:pb-4">
+                    <CardTitle className="text-emerald-50 flex items-center gap-2 text-lg sm:text-xl">
+                      <Star className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-400" />
+                      Movie Statistics
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                      {(item as Movie)?.runtimeInMinutes && (
+                        <article className="backdrop-blur-sm bg-emerald-950/20 rounded-lg p-3 sm:p-4 border border-emerald-500/10">
+                          <section className="flex items-center gap-2 mb-2">
+                            <Clock className="h-3 w-3 sm:h-4 sm:w-4 text-blue-400" />
+                            <span className="text-emerald-100/80 text-xs sm:text-sm">Runtime</span>
+                          </section>
+                          <p className="text-emerald-50 text-lg sm:text-xl font-bold">
+                            {(item as Movie).runtimeInMinutes} min
+                          </p>
+                        </article>
+                      )}
+                      {(item as Movie)?.boxOfficeRevenueInMillions && (
+                        <article className="backdrop-blur-sm bg-emerald-950/20 rounded-lg p-3 sm:p-4 border border-emerald-500/10">
+                          <section className="flex items-center gap-2 mb-2">
+                            <DollarSign className="h-3 w-3 sm:h-4 sm:w-4 text-emerald-400" />
+                            <span className="text-emerald-100/80 text-xs sm:text-sm">Box Office</span>
+                          </section>
+                          <p className="text-emerald-50 text-lg sm:text-xl font-bold">
+                            ${(item as Movie).boxOfficeRevenueInMillions}M
+                          </p>
+                        </article>
+                      )}
+                      {(item as Movie)?.academyAwardWins !== undefined && (
+                        <article className="backdrop-blur-sm bg-emerald-950/20 rounded-lg p-3 sm:p-4 border border-emerald-500/10">
+                          <section className="flex items-center gap-2 mb-2">
+                            <Award className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-400" />
+                            <span className="text-emerald-100/80 text-xs sm:text-sm">Oscar Wins</span>
+                          </section>
+                          <p className="text-emerald-50 text-lg sm:text-xl font-bold">
+                            {(item as Movie).academyAwardWins}
+                          </p>
+                        </article>
+                      )}
+                      {(item as Movie)?.rottenTomatoesScore && (
+                        <article className="backdrop-blur-sm bg-emerald-950/20 rounded-lg p-3 sm:p-4 border border-emerald-500/10">
+                          <section className="flex items-center gap-2 mb-2">
+                            <Star className="h-3 w-3 sm:h-4 sm:w-4 text-red-400" />
+                            <span className="text-emerald-100/80 text-xs sm:text-sm">RT Score</span>
+                          </section>
+                          <p className="text-emerald-50 text-lg sm:text-xl font-bold">
+                            {(item as Movie).rottenTomatoesScore}%
+                          </p>
+                        </article>
+                      )}
+                    </section>
+                  </CardContent>
+                </Card>
+
+                {/* Additional Movie Details */}
+                <Card className="backdrop-blur-md bg-emerald-950/20 border-emerald-500/20">
+                  <CardHeader className="pb-3 sm:pb-4">
+                    <CardTitle className="text-emerald-50 text-lg sm:text-xl">Additional Details</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3 sm:space-y-4">
+                    <section className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                      {(item as Movie)?.budgetInMillions && (
+                        <article>
+                          <section className="flex items-center gap-2 mb-2">
+                            <DollarSign className="h-3 w-3 sm:h-4 sm:w-4 text-emerald-400" />
+                            <span className="text-emerald-100/80 text-sm sm:text-base">Budget</span>
+                          </section>
+                          <p className="text-emerald-50 text-sm sm:text-base">
+                            ${(item as Movie).budgetInMillions} Million
+                          </p>
+                        </article>
+                      )}
+                      {(item as Movie)?.academyAwardNominations && (
+                        <article>
+                          <section className="flex items-center gap-2 mb-2">
+                            <Award className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-400" />
+                            <span className="text-emerald-100/80 text-sm sm:text-base">Oscar Nominations</span>
+                          </section>
+                          <p className="text-emerald-50 text-sm sm:text-base">
+                            {(item as Movie).academyAwardNominations}
+                          </p>
+                        </article>
+                      )}
+                    </section>
+                  </CardContent>
+                </Card>
+              </>
+            )}
+
+            {type === "character" && (
+              <Card className="backdrop-blur-md bg-emerald-950/20 border-emerald-500/20">
+                <CardHeader className="pb-3 sm:pb-4">
+                  <CardTitle className="text-emerald-50 text-lg sm:text-xl">Character Information</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3 sm:space-y-4">
+                  <section className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                    {(item as Character)?.race && (
+                      <article>
+                        <section className="flex items-center gap-2 mb-2">
+                          <Users className="h-3 w-3 sm:h-4 sm:w-4 text-emerald-400" />
+                          <span className="text-emerald-100/80 text-sm sm:text-base">Race</span>
+                        </section>
+                        <p className="text-emerald-50 text-sm sm:text-base">{(item as Character).race}</p>
+                      </article>
+                    )}
+                    {(item as Character)?.gender && (
+                      <article>
+                        <section className="flex items-center gap-2 mb-2">
+                          <Users className="h-3 w-3 sm:h-4 sm:w-4 text-blue-400" />
+                          <span className="text-emerald-100/80 text-sm sm:text-base">Gender</span>
+                        </section>
+                        <p className="text-emerald-50 text-sm sm:text-base">{(item as Character).gender}</p>
+                      </article>
+                    )}
+                    {(item as Character)?.realm && (
+                      <article>
+                        <section className="flex items-center gap-2 mb-2">
+                          <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-amber-400" />
+                          <span className="text-emerald-100/80 text-sm sm:text-base">Realm</span>
+                        </section>
+                        <p className="text-emerald-50 text-sm sm:text-base">{(item as Character).realm}</p>
+                      </article>
+                    )}
+                    {(item as Character)?.birth && (
+                      <article>
+                        <section className="flex items-center gap-2 mb-2">
+                          <Calendar className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-400" />
+                          <span className="text-emerald-100/80 text-sm sm:text-base">Birth</span>
+                        </section>
+                        <p className="text-emerald-50 text-sm sm:text-base break-words">{(item as Character).birth}</p>
+                      </article>
+                    )}
+                    {(item as Character)?.death && (
+                      <article>
+                        <section className="flex items-center gap-2 mb-2">
+                          <Calendar className="h-3 w-3 sm:h-4 sm:w-4 text-red-400" />
+                          <span className="text-emerald-100/80 text-sm sm:text-base">Death</span>
+                        </section>
+                        <p className="text-emerald-50 text-sm sm:text-base break-words">{(item as Character).death}</p>
+                      </article>
+                    )}
+                    {(item as Character)?.spouse && (
+                      <article>
+                        <section className="flex items-center gap-2 mb-2">
+                          <Heart className="h-3 w-3 sm:h-4 sm:w-4 text-pink-400" />
+                          <span className="text-emerald-100/80 text-sm sm:text-base">Spouse</span>
+                        </section>
+                        <p className="text-emerald-50 text-sm sm:text-base">{(item as Character).spouse}</p>
+                      </article>
+                    )}
+                    {(item as Character)?.hair && (
+                      <article>
+                        <section className="flex items-center gap-2 mb-2">
+                          <Users className="h-3 w-3 sm:h-4 sm:w-4 text-orange-400" />
+                          <span className="text-emerald-100/80 text-sm sm:text-base">Hair</span>
+                        </section>
+                        <p className="text-emerald-50 text-sm sm:text-base">{(item as Character).hair}</p>
+                      </article>
+                    )}
+                    {(item as Character)?.height && (
+                      <article>
+                        <section className="flex items-center gap-2 mb-2">
+                          <Users className="h-3 w-3 sm:h-4 sm:w-4 text-cyan-400" />
+                          <span className="text-emerald-100/80 text-sm sm:text-base">Height</span>
+                        </section>
+                        <p className="text-emerald-50 text-sm sm:text-base">{(item as Character).height}</p>
+                      </article>
+                    )}
                   </section>
-                )}
-                {(item as Movie).budgetInMillions && (
-                  <section className="flex items-center gap-2 text-emerald-100/70">
-                    <DollarSign className="h-4 w-4 text-emerald-400" />
-                    <data value={(item as Movie).budgetInMillions}>Budget: ${(item as Movie).budgetInMillions} million</data>
-                  </section>
-                )}
-                {(item as Movie).boxOfficeRevenueInMillions && (
-                  <section className="flex items-center gap-2 text-emerald-100/70">
-                    <DollarSign className="h-4 w-4 text-emerald-400" />
-                    <data value={(item as Movie).boxOfficeRevenueInMillions}>Box Office: ${(item as Movie).boxOfficeRevenueInMillions} million</data>
-                  </section>
-                )}
-                {(item as Movie).academyAwardNominations && (
-                  <section className="flex items-center gap-2 text-emerald-100/70">
-                    <Award className="h-4 w-4 text-emerald-400" />
-                    <data value={(item as Movie).academyAwardNominations}>Academy Award Nominations: {(item as Movie).academyAwardNominations}</data>
-                  </section>
-                )}
-                {(item as Movie).academyAwardWins && (
-                  <section className="flex items-center gap-2 text-emerald-100/70">
-                    <Award className="h-4 w-4 text-emerald-400" />
-                    <data value={(item as Movie).academyAwardWins}>Academy Award Wins: {(item as Movie).academyAwardWins}</data>
-                  </section>
-                )}
-                {(item as Movie).rottenTomatoesScore && (
-                  <section className="flex items-center gap-2 text-emerald-100/70">
-                    <Star className="h-4 w-4 text-emerald-400" />
-                    <data value={(item as Movie).rottenTomatoesScore}>Rotten Tomatoes Score: {(item as Movie).rottenTomatoesScore}%</data>
-                  </section>
-                )}
+                  {(item as Character)?.wikiUrl && (
+                    <nav className="pt-3 sm:pt-4">
+                      <a
+                        href={(item as Character).wikiUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-blue-300 hover:text-blue-200 transition-colors text-sm sm:text-base"
+                      >
+                        <BookOpen className="h-3 w-3 sm:h-4 sm:w-4" />
+                        View on Wiki
+                      </a>
+                    </nav>
+                  )}
+                </CardContent>
+              </Card>
+            )}
+
+            {type === "book" && (
+              <Card className="backdrop-blur-md bg-emerald-950/20 border-emerald-500/20">
+                <CardHeader className="pb-3 sm:pb-4">
+                  <CardTitle className="text-emerald-50 text-lg sm:text-xl">Book Information</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <article className="text-center py-6 sm:py-8">
+                    <BookOpen className="h-12 w-12 sm:h-16 sm:w-16 text-amber-400 mx-auto mb-4" />
+                    <h3 className="text-lg sm:text-xl font-semibold text-emerald-50 mb-2">{item.name}</h3>
+                    <p className="text-emerald-100/70 text-sm sm:text-base">
+                      This is one of the books from J.R.R. Tolkien's Middle-earth legendarium available in The One API.
+                    </p>
+                  </article>
+                </CardContent>
+              </Card>
+            )}
+
+            {type === "quote" && (
+              <Card className="backdrop-blur-md bg-emerald-950/20 border-emerald-500/20">
+                <CardHeader className="pb-3 sm:pb-4">
+                  <CardTitle className="text-emerald-50 text-lg sm:text-xl">Quote Details</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <article className="text-center py-6 sm:py-8">
+                    <MessageCircle className="h-12 w-12 sm:h-16 sm:w-16 text-teal-400 mx-auto mb-4" />
+                    <blockquote className="text-lg sm:text-xl font-medium text-emerald-50 mb-4 sm:mb-6 italic break-words">
+                      "{(item as Quote).dialog}"
+                    </blockquote>
+                    <section className="space-y-2 sm:space-y-3 text-emerald-100/70">
+                      {(item as Quote).characterName && (
+                        <article className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2">
+                          <section className="flex items-center gap-2">
+                            <Users className="h-3 w-3 sm:h-4 sm:w-4 text-emerald-400" />
+                            <span className="text-sm sm:text-base">Character:</span>
+                          </section>
+                          {(item as Quote).character ? (
+                            <Link
+                              href={`/character/${(item as Quote).character}`}
+                              className="text-emerald-300 hover:text-emerald-200 underline underline-offset-2 transition-colors text-sm sm:text-base"
+                            >
+                              {(item as Quote).characterName}
+                            </Link>
+                          ) : (
+                            <span className="text-emerald-300 text-sm sm:text-base">
+                              {(item as Quote).characterName}
+                            </span>
+                          )}
+                        </article>
+                      )}
+                      {(item as Quote).movieName && (
+                        <article className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2">
+                          <section className="flex items-center gap-2">
+                            <Film className="h-3 w-3 sm:h-4 sm:w-4 text-blue-400" />
+                            <span className="text-sm sm:text-base">Movie:</span>
+                          </section>
+                          {(item as Quote).movie ? (
+                            <Link
+                              href={`/movie/${(item as Quote).movie}`}
+                              className="text-blue-300 hover:text-blue-200 underline underline-offset-2 transition-colors text-sm sm:text-base"
+                            >
+                              {(item as Quote).movieName}
+                            </Link>
+                          ) : (
+                            <span className="text-blue-300 text-sm sm:text-base">{(item as Quote).movieName}</span>
+                          )}
+                        </article>
+                      )}
+                      {!(item as Quote).characterName && !(item as Quote).movieName && (
+                        <p className="text-emerald-100/50 text-sm sm:text-base">Quote details not available</p>
+                      )}
+                    </section>
+                  </article>
+                </CardContent>
+              </Card>
+            )}
+
+            {/* API Info */}
+            <Card className="backdrop-blur-md bg-emerald-950/10 border-emerald-500/10">
+              <CardContent className="p-3 sm:p-4">
+                <footer className="text-emerald-100/50 text-xs sm:text-sm text-center break-words">
+                  Data sourced from The One API • Type: {type} • ID: {item._id}
+                </footer>
               </CardContent>
             </Card>
-          )}
-
-          {type === "character" && (
-            <Card className="backdrop-blur-md bg-emerald-950/30 border-emerald-500/20">
-              <CardHeader>
-                <CardTitle className="text-xl sm:text-2xl font-bold text-emerald-50">
-                  {(item as Character).name}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {(item as Character).race && (
-                  <section className="flex items-center gap-2 text-emerald-100/70">
-                    <Users className="h-4 w-4 text-emerald-400" />
-                    <data value={(item as Character).race}>Race: {(item as Character).race}</data>
-                  </section>
-                )}
-                {(item as Character).gender && (
-                  <section className="flex items-center gap-2 text-emerald-100/70">
-                    <Users className="h-4 w-4 text-emerald-400" />
-                    <data value={(item as Character).gender}>Gender: {(item as Character).gender}</data>
-                  </section>
-                )}
-                {(item as Character).birth && (
-                  <section className="flex items-center gap-2 text-emerald-100/70">
-                    <Calendar className="h-4 w-4 text-emerald-400" />
-                    <time dateTime={(item as Character).birth}>Birth: {(item as Character).birth}</time>
-                  </section>
-                )}
-                {(item as Character).death && (
-                  <section className="flex items-center gap-2 text-emerald-100/70">
-                    <Calendar className="h-4 w-4 text-emerald-400" />
-                    <time dateTime={(item as Character).death}>Death: {(item as Character).death}</time>
-                  </section>
-                )}
-                {(item as Character).spouse && (
-                  <section className="flex items-center gap-2 text-emerald-100/70">
-                    <Heart className="h-4 w-4 text-emerald-400" />
-                    <data value={(item as Character).spouse}>Spouse: {(item as Character).spouse}</data>
-                  </section>
-                )}
-                {(item as Character).realm && (
-                  <section className="flex items-center gap-2 text-emerald-100/70">
-                    <MapPin className="h-4 w-4 text-emerald-400" />
-                    <data value={(item as Character).realm}>Realm: {(item as Character).realm}</data>
-                  </section>
-                )}
-              </CardContent>
-            </Card>
-          )}
-
-          {type === "book" && (
-            <Card className="backdrop-blur-md bg-emerald-950/30 border-emerald-500/20">
-              <CardHeader>
-                <CardTitle className="text-xl sm:text-2xl font-bold text-emerald-50">
-                  {(item as Book).name}
-                </CardTitle>
-              </CardHeader>
-            </Card>
-          )}
-
-          {type === "quote" && (
-            <Card className="backdrop-blur-md bg-emerald-950/30 border-emerald-500/20">
-              <CardHeader>
-                <CardTitle className="text-xl sm:text-2xl font-bold text-emerald-50">
-                  Quote
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <blockquote className="text-lg sm:text-xl text-emerald-100/90 italic">
-                  "{(item as Quote).dialog}"
-                </blockquote>
-                {(item as Quote).characterName && (
-                  <section className="flex items-center gap-2 text-emerald-100/70">
-                    <Users className="h-4 w-4 text-emerald-400" />
-                    <data value={(item as Quote).characterName}>Character: {(item as Quote).characterName}</data>
-                  </section>
-                )}
-                {(item as Quote).movieName && (
-                  <section className="flex items-center gap-2 text-emerald-100/70">
-                    <Film className="h-4 w-4 text-emerald-400" />
-                    <data value={(item as Quote).movieName}>Movie: {(item as Quote).movieName}</data>
-                  </section>
-                )}
-              </CardContent>
-            </Card>
-          )}
+          </section>
         </section>
       </article>
     </main>
