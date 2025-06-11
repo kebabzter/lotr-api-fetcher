@@ -9,7 +9,7 @@ In addition, the project itself is hosted using Vercel's hosting services.
 You can access the application in 2 ways
 
 ### On the web
-To access the app you can use this link: [LOTR-fetcher](https://lotr-api-fetcher-6g0uwk1tv-gabriel-chitarlievs-projects.vercel.app/)
+To access the app you can use this link: [LOTR-fetcher](https://lotr-api-fetcher.vercel.app)
 ### Locally:
 To run locally you must download the this repo as a zip or clone it.
 
